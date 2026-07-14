@@ -18,8 +18,7 @@ Do not file public issues for security vulnerabilities.
 
 ## Response Process
 
-1. Acknowledgment within 7 days
-2. Triage and impact assessment
+1. 2. Triage and impact assessment
 3. Fix development and testing
 4. Coordinated disclosure
 

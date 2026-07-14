@@ -37,7 +37,7 @@ npm run safety
 npm run test:safety
 
 # Build extension (when Phase 1 is implemented)
-npm run build
+# npm run build (unavailable in Phase 0)
 ```
 
 ## Safety
