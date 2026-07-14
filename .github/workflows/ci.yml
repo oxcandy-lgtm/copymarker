@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  source_safety:
+    name: Public Safety Scan (Tracked)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Run public-safety scanner (tracked)
+        run: node scripts/public-safety.mjs --tracked
+        env:
+          COPYMARKER_PRIVATE_DENYLIST_FILE: ${{ secrets.COPYMARKER_PRIVATE_DENYLIST_FILE }}
+
+  safety_tests:
+    name: Public Safety Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run safety tests
+        run: npm run test:safety
+      - name: Run safety scan
+        run: npm run safety
+        env:
+          COPYMARKER_PRIVATE_DENYLIST_FILE: ${{ secrets.COPYMARKER_PRIVATE_DENYLIST_FILE }}

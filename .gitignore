@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+coverage/
+package/
+*.map
+*.zip
+.env
+.env.*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+.private-denylist*
