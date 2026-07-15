@@ -1,0 +1,14 @@
+{
+  "name": "copymarker",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/public-safety.test.mjs",
+    "test:safety": "node --test tests/public-safety.test.mjs",
+    "safety": "node scripts/public-safety.mjs --tracked"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
